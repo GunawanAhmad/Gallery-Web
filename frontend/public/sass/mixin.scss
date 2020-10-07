@@ -1,0 +1,12 @@
+@mixin  pseudoTriangle($size, $side, $color : #4B55C1, $left : 0, $top : 0) {
+
+    &::after {
+        content: '';
+        border: $size solid transparent;
+        border-#{$side}-color: $color;
+        left: $left;
+        top: $top;
+        position: absolute;
+        
+    }
+}

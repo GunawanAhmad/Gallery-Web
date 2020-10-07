@@ -1,4 +1,6 @@
 @import "variable.scss";
+@import 'mixin.scss';
+
 
 nav {
     display: flex;
@@ -9,14 +11,41 @@ nav {
     color: $primary-color;
     font-family: $primary-font;
 
+    .logo {
+        a {
+            text-decoration: none;
 
-    ul {
+            h1 {
+                color: $primary-color;
+                font-weight: 800;
+
+                .flip {
+                    color: $primary-color;
+                    transform: scale(-1, 1);
+                }
+
+                span {
+                    display: inline-block;
+                    color: $fourth-color;
+                }
+            }
+        }
+        
+    }
+
+
+    .nav__ul {
         display: flex;
         // border: 1px solid red;
         justify-content: flex-end;
         align-items: center;
 
-        li {
+
+        .search {
+            // search button
+        }
+
+        .nav__list {
             list-style: none;
             font-weight: 600;
 
@@ -26,15 +55,71 @@ nav {
              &:nth-child(2) {
                 margin: 0 .5rem;
             }
+
+            &.img-profile {
+                position: relative;
+
+                .img {
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 50%;
+                    background: lightgray;
+                    cursor: pointer;
+                }
+
+
+                .menu__list {
+                    position: absolute;
+                    // border: 1px solid red;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    bottom: -8rem;
+                    width: 300%;
+                    right: 0;
+                    left: auto;
+                    color: $primary-color;
+                    background-color : $third-color;
+                    border-radius: $border-radius-light;
+                    // overflow: hidden;
+                    height: 100px;
+                    opacity: 0;
+                    pointer-events: none;
+                    transform: translateY(-20%);
+                    transition: all 200ms ease;
+                    @include pseudoTriangle(.6rem, bottom, $color : $third-color, $top : -1rem, $left : 75%)
+
+                    &.show {
+                        opacity: 1;
+                        transform: translateY(0);
+                        pointer-events: all;
+                    }
+                    
+                    li {
+                        width: 100%;
+                        flex: 1;
+                        height: 35%;
+                        display: flex;
+                        align-items: center;
+                        padding: 0 1rem;
+                        justify-content: flex-start;
+                        cursor: pointer;
+                        font-size: .9rem;
+                        border-radius: $border-radius-light ;
+
+                        &:hover {
+                            background-color: $shadow-color;
+                        }
+                    }
+
+                    
+                }
+            }
            
         }
 
-        .img-profile {
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-            background: lightgray;
-        }
+        
     }
 
     .logo {

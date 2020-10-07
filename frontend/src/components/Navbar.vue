@@ -1,12 +1,22 @@
 <template>
   <nav>
       <div class="logo">
-          <h1>Ga.</h1>
+          <router-link to="/">
+            <h1>Ga<span class="flip">L</span><span>Leri</span></h1>
+          </router-link>
+          
       </div>
-      <ul>
-          <li><i class="fas fa-search"></i></li>
-          <li>Gunawan Nur Ahmad</li>
-          <li class="img-profile"></li>
+      <ul class="nav__ul">
+          <li class="nav__list search"><i class="fas fa-search"></i></li>
+          <li class="nav__list">Gunawan Nur Ahmad</li>
+          <li class="img-profile nav__list">
+              <div class="img" @click="showMenu"></div>
+              <ul class="menu__list" ref="menuList">
+                  <li>Your profile</li>
+                  <li>Setting</li>
+                  <li>Log out</li>
+              </ul>
+          </li>
       </ul>
      
   </nav>
@@ -14,6 +24,11 @@
 
 <script>
 export default {
+    methods : {
+        showMenu() {
+            this.$refs.menuList.classList.toggle('show')
+        }
+    }
 
 }
 </script>
