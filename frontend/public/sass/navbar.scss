@@ -12,6 +12,7 @@ nav {
     font-family: $primary-font;
 
     .logo {
+        font-weight: 800;
         a {
             text-decoration: none;
 
@@ -42,7 +43,41 @@ nav {
 
 
         .search {
-            // search button
+            position: relative;
+            // border: 1px solid red;
+            overflow: hidden;
+            
+
+            input {
+                transition: width 100ms ease;
+                height: 2rem;
+                width: 2rem;
+                border-radius: $border-radius-bold;
+                border: none;
+                font-size: 1rem;
+                outline: none;
+                pointer-events: none;
+
+                &.show {
+                    border-radius: $border-radius-bold;
+                    pointer-events: all;
+                    width: 300px;
+                    padding: 0 .7rem 0 2rem;
+                }
+            }
+
+            .search__logo {
+                position: absolute;
+                right: .5rem;
+                top: 50%;
+                transform: translateY(-50%);
+                color: $secondary-color;
+                cursor: pointer;
+
+                &.show {
+                    right: 91%;
+                }
+            }
         }
 
         .nav__list {
@@ -122,7 +157,5 @@ nav {
         
     }
 
-    .logo {
-        font-weight: 800;
-    }
+    
 }

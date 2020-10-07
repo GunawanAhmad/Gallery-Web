@@ -7,7 +7,13 @@
           
       </div>
       <ul class="nav__ul">
-          <li class="nav__list search"><i class="fas fa-search"></i></li>
+          <li class="nav__list search" >
+              <input type="text" ref="searchInput">
+              <span class="search__logo" @click="showSearchInput" ref="searchLogo">
+                  <i class="fas fa-search"></i>
+              </span>
+              
+          </li>
           <li class="nav__list">Gunawan Nur Ahmad</li>
           <li class="img-profile nav__list">
               <div class="img" @click="showMenu"></div>
@@ -27,6 +33,11 @@ export default {
     methods : {
         showMenu() {
             this.$refs.menuList.classList.toggle('show')
+        },
+        showSearchInput() {
+            console.log('search')
+            this.$refs.searchInput.classList.toggle('show')
+            this.$refs.searchLogo.classList.toggle('show')
         }
     }
 
