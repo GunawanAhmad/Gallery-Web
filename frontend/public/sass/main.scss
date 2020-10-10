@@ -1,0 +1,29 @@
+@import "variable.scss";
+
+.main {
+    display: grid;
+    padding: 2rem;
+    
+
+    .add__album {
+        cursor: pointer;
+        height: 200px;
+        width: 200px;
+        background-color: lightgray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        border-radius: $border-radius-light;
+
+        .icon {
+            font-size: 5rem;
+            opacity: .4;
+        }
+
+        .title {
+            position: absolute;
+            bottom: -1.5rem;
+        }
+    }
+}
