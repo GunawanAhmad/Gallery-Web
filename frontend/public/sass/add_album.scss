@@ -1,0 +1,67 @@
+@import "variable.scss";
+
+.form {
+    z-index: 10;
+    background: $primary-color;
+    height: 80vh;
+    max-width: 500px;
+    width: 80vw;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: $border-radius-light;
+    padding: 2rem;
+
+    .input_part {
+        text-align: left;
+        margin: 1.5rem 0;
+
+        label, input {
+            display: block;
+        }
+        input,textarea {
+            border-radius: $border-radius-light;
+            border: 1.5px solid $lightgray;
+            height: 1.5rem;
+            outline-color: $third-color;
+            margin-top: .5rem;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+        }
+        textarea {
+            height: auto;
+        }
+        select {
+            margin-top: .5rem;
+            width: 30%;
+            background-color: $shadow-color;
+            color: $primary-color;
+            height: 1.5rem;
+            border-radius: $border-radius-light;
+            border: none;
+            height: 2rem;
+            font-size: 1rem;
+            padding: 0 .5rem;
+           
+        }
+
+    }
+
+    .btn {
+        display: block;
+        height: 2rem;
+        background-color: $third-color;
+        border: none;
+        border-radius: $border-radius-light;
+        cursor: pointer;
+        color: $primary-color;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        
+    }
+
+
+
+}

@@ -3,18 +3,22 @@
 .main {
     display: grid;
     padding: 2rem;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     
 
     .add__album {
         cursor: pointer;
         height: 200px;
         width: 200px;
-        background-color: lightgray;
+        background-color: rgba(169, 169, 169, .3);
         display: flex;
         justify-content: center;
         align-items: center;
         position: relative;
         border-radius: $border-radius-light;
+        opacity: .8;
 
         .icon {
             font-size: 5rem;
@@ -24,6 +28,50 @@
         .title {
             position: absolute;
             bottom: -1.5rem;
+        }
+
+
+        
+    }
+
+    .album_section {
+        cursor: pointer;
+        height: 200px;
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        // margin: 2rem 0;
+        // border: 1px solid red;
+        margin: 0 2vw 3rem 0;
+
+        .icon {
+            font-size: 7rem;
+            opacity: .4;
+        }
+
+
+        .title {
+            position: absolute;
+            bottom: -1.5rem;
+        }
+    }
+
+
+    .add_album_backg {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: $secondary-color;
+        opacity: .5;
+        display: none;
+        z-index: 9;
+
+        &.show {
+            display: block;
         }
     }
 }
