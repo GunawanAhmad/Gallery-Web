@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-      <div class="album_section" v-for="(album, index) in albums" :key="index">
+      <div class="album_section" v-for="(album, index) in albums" :key="index" @click="showPhotos">
           <div class="icon">
               <i class="fas fa-folder"></i>
           </div>
@@ -38,11 +38,14 @@ export default {
         showAlbum() {
             this.isAddAlbum = !this.isAddAlbum
             this.$refs.addAlbumBackg.classList.toggle('show')
+        },
+        showPhotos() {
+            this.$router.push({path : '/gunawanart/test1', params : {data : 'my name'}})
         }
     }
 }
 </script>
 
-<style scoped src="../../public/css/main.css">
+<style scoped src="../../public/sass/main.scss" lang="scss">
 
 </style>

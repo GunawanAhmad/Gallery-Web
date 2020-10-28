@@ -111,6 +111,6 @@ export default {
 }
 </script>
 
-<style scoped src="../../public/css/login.css">
+<style scoped src="../../public/sass/login.scss" lang="scss">
 
 </style>

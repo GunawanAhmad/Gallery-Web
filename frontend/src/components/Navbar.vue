@@ -44,6 +44,6 @@ export default {
 }
 </script>
 
-<style scoped src="../../public/css/navbar.css">
+<style scoped src="../../public/sass/navbar.scss" lang="scss">
 
 </style>

@@ -45,6 +45,6 @@ export default {
 }
 </script>
 
-<style scoped src="../../public/css/add_album.css">
+<style scoped src="../../public/sass/add_album.scss" lang="scss">
 
 </style>
