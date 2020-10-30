@@ -9,12 +9,18 @@
   </div>
   <div class="photos">
      <div class="img" v-for="(img,index) in photos" :key="index">
-         <img :src="img" alt="" @click="showPhoto(img)">
+         <img :src="img" alt="" @click="showPhoto(img, index)">
      </div>
   </div>
   <div class="back-photo" ref="backPhoto">
       <div class="background" @click="hidePhoto"></div>
-      <img src="" alt="" ref="imgFocus">
+      <div class="img">
+          <img src="" alt="" ref="imgFocus">
+          <div class="icon" @click="deletePhoto">
+              <i class="fas fa-trash"></i>
+          </div>
+      </div>
+      
   </div>
 </div>
    
@@ -26,21 +32,22 @@ export default {
     data() {
         return {
             photos : [],
-            selectedFile : null
+            selectedFile : null,
+            albumIndex : undefined,
+            selectedPhoto : undefined
         }
     },
     created() {
         //find the index of the current album in vue store
-        let albumIndex;
         let currentAlbumName = this.$route.params.album;
         let albums = this.$store.state.albums;
         for(let i = 0; i < albums.length; i++) {
             if (currentAlbumName === albums[i].albumName) {
-                albumIndex = i;
+                this.albumIndex = i;
 
             }
         }
-        this.photos = this.$store.state.albums[albumIndex].photos;
+        this.photos = this.$store.state.albums[this.albumIndex].photos;
 
     },
     methods : {
@@ -80,6 +87,10 @@ export default {
         },
         hidePhoto() {
             this.$refs.backPhoto.classList.toggle('show')
+        },
+        deletePhoto() {
+            this.$store.state.albums[this.albumIndex].photos.splice(this.selectedPhoto, 1)
+            this.hidePhoto()
         }
     }
 }
