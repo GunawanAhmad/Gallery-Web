@@ -2,18 +2,22 @@
 <div class="app">
   <h1>Cool Walpaper</h1>
   <div class="input">
-      <div class="icon">
+      <div class="icon" @click="addImage">
           <i class="fas fa-plus"></i>
       </div>
-      <input type="file">
+      <input type="file" ref="file" @change="fileSelected">
   </div>
   <div class="photos">
      <div class="img" v-for="(img,index) in photos" :key="index">
-         <img :src="require('../assets/' + img)" alt="">
+         <img :src="img" alt="" @click="showPhoto(img)">
      </div>
   </div>
+  <div class="back-photo" ref="backPhoto">
+      <div class="background" @click="hidePhoto"></div>
+      <img src="" alt="" ref="imgFocus">
+  </div>
 </div>
-  
+   
 </template>
 
 <script>
@@ -22,10 +26,61 @@ export default {
     data() {
         return {
             photos : [],
+            selectedFile : null
         }
     },
     created() {
-        this.photos = this.$store.state.albums[0].photos;
+        //find the index of the current album in vue store
+        let albumIndex;
+        let currentAlbumName = this.$route.params.album;
+        let albums = this.$store.state.albums;
+        for(let i = 0; i < albums.length; i++) {
+            if (currentAlbumName === albums[i].albumName) {
+                albumIndex = i;
+
+            }
+        }
+        this.photos = this.$store.state.albums[albumIndex].photos;
+
+    },
+    methods : {
+        addImage() {
+            //Clicking file input through icon button
+            const file = this.$refs.file;
+            file.click();
+
+            
+        },
+        fileSelected(event) {
+            //add image to album
+            let albumIndex;
+            let currentAlbumName = this.$route.params.album;
+            let albums = this.$store.state.albums;
+
+            //find the index of the current album in vue store
+            for(let i = 0; i < albums.length; i++) {
+                if (currentAlbumName === albums[i].albumName) {
+                    albumIndex = i;
+                }
+            }
+
+            //select the selected file
+            this.selectedFile = event.target.files[0]
+            
+            //add selected file to album
+            let path = URL.createObjectURL(this.selectedFile)
+            
+            //add image to album
+            this.$store.state.albums[albumIndex].photos.unshift(path)
+            
+        },
+        showPhoto(img) {
+            this.$refs.backPhoto.classList.toggle('show')
+            this.$refs.imgFocus.src = img;
+        },
+        hidePhoto() {
+            this.$refs.backPhoto.classList.toggle('show')
+        }
     }
 }
 </script>

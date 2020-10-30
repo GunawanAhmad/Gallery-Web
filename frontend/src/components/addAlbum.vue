@@ -36,7 +36,8 @@ export default {
             let album = {
                 albumName : this.albumName,
                 albumType : albumType,
-                albumDescription : this.albumDescription
+                albumDescription : this.albumDescription,
+                photos : []
             };
             this.$store.state.albums.push(album)
             

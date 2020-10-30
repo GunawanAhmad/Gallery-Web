@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-      <div class="album_section" v-for="(album, index) in albums" :key="index" @click="showPhotos">
+      <div class="album_section" v-for="(album, index) in albums" :key="index" @click="showPhotos(album.albumName)">
           <div class="icon">
               <i class="fas fa-folder"></i>
           </div>
@@ -39,8 +39,8 @@ export default {
             this.isAddAlbum = !this.isAddAlbum
             this.$refs.addAlbumBackg.classList.toggle('show')
         },
-        showPhotos() {
-            this.$router.push({path : '/gunawanart/test1', params : {data : 'my name'}})
+        showPhotos(albumName) {
+            this.$router.push({path : `/gunawanart/${albumName}`, params : {data : 'my name'}})
         }
     }
 }
