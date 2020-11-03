@@ -2,7 +2,7 @@
   <nav>
       <div class="logo">
           <router-link to="/">
-            <h1>Ga<span class="flip">L</span><span>Leri</span></h1>
+            <h1>Ga<span>lio</span></h1>
           </router-link>
           
       </div>

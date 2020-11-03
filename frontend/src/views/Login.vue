@@ -3,13 +3,13 @@
   <nav class="navbar">
       <div class="logo">
           <router-link to="/">
-            <h1>Ga<span class="flip">L</span><span>Leri</span></h1>
+            <h1>Ga<span>lio</span></h1>
           </router-link>
           
       </div>
       <div class="nav__list">
           <ul>
-              <li v-if="!isSignup" @click="isSignup = true">Sign Up</li>
+              <li v-if="!isSignup" @click="isSignup = true">Signup</li>
               <li v-else @click="isSignup = false">Login</li>
               <li><router-link to="/about">About</router-link> </li>
           </ul>

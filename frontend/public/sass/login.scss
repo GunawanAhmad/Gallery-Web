@@ -1,4 +1,5 @@
 @import "variable.scss";
+@import "mixin.scss";
 
 .app {
     display: flex;
@@ -15,17 +16,14 @@
         top: 0;
 
         .logo {
+            font-size: 1.1rem;
             a {
                 text-decoration: none;
 
                 h1 {
                     color: $third-color;
                     font-weight: 800;
-    
-                    .flip {
-                        color: $third-color;
-                        transform: scale(-1, 1);
-                    }
+                    
     
                     span {
                         display: inline-block;
@@ -43,10 +41,11 @@
                 list-style: none;
                 color: $primary-color;
                 margin: 0 1.5rem;
-                border: .8px solid $primary-color;
-                padding: .4rem .5rem;
-                border-radius: $border-radius-bold;
+                @include navHover(-0.5rem);
+                // padding: .4rem .5rem;
+                position: relative;
                 cursor: pointer;
+                font-size: 1.1rem;
 
 
                 a {

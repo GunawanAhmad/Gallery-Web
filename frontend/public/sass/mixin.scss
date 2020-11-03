@@ -10,3 +10,18 @@
         
     }
 }
+
+@mixin navHover($bottom : 0) {
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: $bottom;
+        height: 3px;
+        background-color: $primary-color;
+        width: 0%;
+        transition: width 250ms ease;
+    }
+    &:hover:before {
+        width: 100%;
+    }
+}
