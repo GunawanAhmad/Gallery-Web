@@ -8,18 +8,25 @@
         <li class="logo">
           <h1>Ga<span>lio</span></h1>
         </li>
-        <li>About</li>
+        <li v-if="isAboutPage" @click="isAboutPage = !isAboutPage">About</li>
+        <li v-else @click="isAboutPage = !isAboutPage">Home</li>
         <li><router-link to="/login">Login</router-link> </li>
       </ul>
     </nav>
     <main>
-      <h1>
+      
+      
+        <h1>
         web <span> gallery</span>
       </h1>
-      <p>capture your best moment, create album  <br>
+      
+      <p v-if="isAboutPage" >Galio is web App where you can put your picture into an albums. <br>
+      You can keep your albums private or you can make it public so people can see it</p>
+      <p v-else>capture your best moment, create album  <br>
           and save it online 
       </p>
       <button class="btn">Get started</button>
+      
     </main>
   </div>
 </template>
@@ -29,7 +36,11 @@
 
 
 export default {
-  
+  data() {
+    return {
+      isAboutPage : false
+    }
+  }
   
 }
 </script>
