@@ -14,7 +14,7 @@
               </span>
               
           </li>
-          <li class="nav__list">Gunawan Nur Ahmad</li>
+          <li class="nav__list name">Gunawan Nur Ahmad</li>
           <li class="img-profile nav__list">
               <div class="img" @click="showMenu"></div>
               <ul class="menu__list" ref="menuList">

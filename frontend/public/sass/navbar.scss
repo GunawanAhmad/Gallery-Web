@@ -38,6 +38,8 @@ nav {
         justify-content: flex-end;
         align-items: center;
 
+        
+
 
         .search {
             position: relative;
@@ -120,6 +122,7 @@ nav {
                     pointer-events: none;
                     transform: translateY(-20%);
                     transition: all 200ms ease;
+                    z-index: 999;
                     @include pseudoTriangle(.6rem, bottom, $color : $third-color, $top : -1rem, $left : 75%);
 
                     &.show {
@@ -151,6 +154,25 @@ nav {
            
         }
 
+        
+    }
+
+    @media only screen and (max-width: 700px) {
+        .nav__list.name {
+            display: none;
+        }
+
+        .nav__list.search {
+            input {
+                &.show {
+                    width: 200px;
+                }
+            }
+
+            .search__logo.show {
+                right: 85%;
+            }
+        }
         
     }
 
