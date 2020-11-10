@@ -8,10 +8,16 @@
       </div>
       <ul class="nav__ul">
           <li class="nav__list search" >
-              <input type="text" ref="searchInput">
+              <input type="text" ref="searchInput" @focus="showResultBar" @focusout="showResultBar" v-model="inputSearch">
               <span class="search__logo" @click="showSearchInput" ref="searchLogo">
                   <i class="fas fa-search"></i>
               </span>
+              <div class="search-result" v-show="resultShow">
+                  <ul ref="suggestionBar" @mouseover="suggestBoxHover" @mouseout="suggestBoxHover">
+                      <li v-for="(data,index) in arrSearchResult" :key="index" @click="selectSuggestion(data)">{{ data }}</li>
+                  </ul>
+              </div>
+              
               
           </li>
           <li class="nav__list name">Gunawan Nur Ahmad</li>
@@ -30,15 +36,45 @@
 
 <script>
 export default {
+    data() {
+        return {
+            resultShow : false,
+            arrSearchResult : ['makan', 'ayam'],
+            inputSearch : ''
+        }
+    },
     methods : {
         showMenu() {
             this.$refs.menuList.classList.toggle('show')
         },
         showSearchInput() {
-            console.log('search')
             this.$refs.searchInput.classList.toggle('show')
             this.$refs.searchLogo.classList.toggle('show')
+        },
+        showSearchResult() {
+            
+            console.log('masuk')
+        },
+        showResultBar() {
+            if(!this.$refs.suggestionBar.classList.contains('hovered')) {
+                this.resultShow = !this.resultShow;
+            }
+    
+            if (this.arrSearchResult.length > 0) {
+                this.$refs.searchInput.classList.toggle('result-show')
+            }
+            
+        },
+        suggestBoxHover() {
+            this.$refs.suggestionBar.classList.toggle('hovered')
+        },
+        selectSuggestion(data) {
+            this.inputSearch = data;
+            this.resultShow = false;
+            this.$refs.searchInput.classList.remove('result-show')
         }
+        
+       
     }
 
 }
