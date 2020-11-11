@@ -8,7 +8,7 @@
         <li class="logo">
           <h1>Ga<span>lio</span></h1>
         </li>
-        <li v-if="isAboutPage" @click="isAboutPage = !isAboutPage">About</li>
+        <li v-if="!isAboutPage" @click="isAboutPage = !isAboutPage">About</li>
         <li v-else @click="isAboutPage = !isAboutPage">Home</li>
         <li><router-link to="/login">Login</router-link> </li>
       </ul>

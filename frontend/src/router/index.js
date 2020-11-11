@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Main from '../views/main.vue'
 import albumPhotos from '../views/albumPhotos.vue'
+import searchResultPage from '../views/searchResultPage.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     component : Login
   },
   {
+    path : '/search',
+    name : 'Search page',
+    component : searchResultPage
+  },
+  {
     path : '/:user',
     name : 'Main Page',
     component : Main
@@ -33,6 +39,8 @@ const routes = [
     name : 'photos',
     component : albumPhotos
   }
+  
+  
 ]
 
 const router = createRouter({

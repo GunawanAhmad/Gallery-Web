@@ -12,7 +12,7 @@
               <span class="search__logo" @click="showSearchInput" ref="searchLogo">
                   <i class="fas fa-search"></i>
               </span>
-              <div class="search-result" v-show="resultShow">
+              <div class="search-result" v-show="resultShow"> 
                   <ul ref="suggestionBar" @mouseover="suggestBoxHover" @mouseout="suggestBoxHover">
                       <li v-for="(data,index) in arrSearchResult" :key="index" @click="selectSuggestion(data)">{{ data }}</li>
                   </ul>
@@ -50,6 +50,7 @@ export default {
         showSearchInput() {
             this.$refs.searchInput.classList.toggle('show')
             this.$refs.searchLogo.classList.toggle('show')
+            this.inputSearch = ''
         },
         showSearchResult() {
             
@@ -72,6 +73,7 @@ export default {
             this.inputSearch = data;
             this.resultShow = false;
             this.$refs.searchInput.classList.remove('result-show')
+            this.$router.push({path : '/search', query : {q : 'user'}})
         }
         
        
