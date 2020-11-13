@@ -17,7 +17,7 @@
             </ul>
         </div>
         <div class="result-section">
-            <h1 class="title-section">{{ results.length }} users</h1>
+            <h1 class="title-section">{{ tabOpen }}</h1>
             <ul class="result-list">
                 <li v-for="(result,index) in results" :key="index">
                     <p class="result-name">{{ result.username }}</p>
@@ -37,18 +37,28 @@ export default {
                         {username : 'nurad', name : 'nurasdi ahmad'},
                         {username : 'nurere', name : 'Maximas'}],
             sidebarActive : 'user',
-            resultsCount : {users : 4, other : 0, your : 2} 
+            resultsCount : {users : 4, other : 0, your : 2},
+            tabOpen : ''
 
         }
     },
     mounted() {
-        console.log(this.$route.query.q)
+        console.log(this.$route.query.q);
+        this.tabOpen = this.results.length + ' users'
     },
     methods : {
         sidebarActiveCheck(tab) {
             this.sidebarActive = tab;
+            if (tab == 'user') {
+                this.tabOpen = this.results.length + ' users'
+            } else if(tab == 'your') {
+                this.tabOpen = this.results.length + ' your albums results'
+            } else {
+                this.tabOpen = this.results.length + " other's albums results"
+            }
         }
     }
+
 }
 </script>
 

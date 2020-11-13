@@ -20,7 +20,7 @@
               
               
           </li>
-          <li class="nav__list name">Gunawan Nur Ahmad</li>
+          <li class="nav__list name">Gunawan</li>
           <li class="img-profile nav__list">
               <div class="img" @click="showMenu"></div>
               <ul class="menu__list" ref="menuList">
@@ -73,7 +73,7 @@ export default {
             this.inputSearch = data;
             this.resultShow = false;
             this.$refs.searchInput.classList.remove('result-show')
-            this.$router.push({path : '/search', query : {q : 'user'}})
+            this.$router.push({path : '/search', query : {q : data}})
         }
         
        

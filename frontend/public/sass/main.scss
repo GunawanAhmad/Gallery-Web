@@ -1,66 +1,145 @@
 @import "variable.scss";
 
 .main {
-    display: grid;
     padding: 2rem;
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    // border: 1px solid red;
+    max-width: 1366px;
+    margin: auto;
+    // flex-wrap: wrap;
     
 
-    .add__album {
-        cursor: pointer;
-        height: 200px;
-        width: 200px;
-        background-color: rgba(169, 169, 169, .3);
+    .profile-container {
+        width: 30%;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        border-radius: $border-radius-light;
-        opacity: .8;
-
-        .icon {
-            font-size: 5rem;
-            opacity: .4;
-        }
-
-        .title {
-            position: absolute;
-            bottom: -1.5rem;
-        }
-
-
-        
-    }
-
-    .album_section {
-        cursor: pointer;
-        height: 200px;
-        width: 200px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        // margin: 2rem 0;
+        flex-direction: column;
+        // justify-content: flex-start;
+        align-items: flex-start;
+        // flex-basis: 0;
         // border: 1px solid red;
-        margin: 0 2vw 3rem 0;
 
-        .icon {
-            font-size: 7rem;
-            opacity: .4;
+        .photo {
+            height: 200px;
+            width: 200px;
+            background-color: $lightgray;
+            border-radius: 50%;
+            // align-self: center;
         }
 
+        .fullname {
+            font-weight: 600;
+            font-size: 1.8rem;
+            margin-top : 1rem;
+            text-align: left;
+        }
+        .username {
+            font-weight: lighter;
+            // border: 1px solid red;
+            text-align: left;
+        }
+        .desc {
+            text-align: left;
+            margin: 1rem 0;
+        }
+        .edit-btn {
+            margin-bottom: 1rem;
+            padding: .3rem 1rem;
+            border-radius: 5px;
+            width: 10rem;
+            border: 1px solid $lightgray;
+            cursor: pointer;
+        }
+       
+        .follow-info {
+            display: flex;
+            // font-weight: 500;
 
-        .title {
-            position: absolute;
-            bottom: -1.5rem;
+            
+
+            .icon {
+                margin-right: .2rem;
+                color: $darkgray;
+                
+            }
+
+            .followers {
+                margin-right: 1.5rem;
+                position: relative;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    right: -17%;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    height: 5px;
+                    width: 5px;
+                    border-radius: 50%;
+                    background-color: $lightgray;
+                    
+                }
+            }
         }
     }
+    
+
+    
+
+    .albums-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-left: 5rem;
+        align-content: flex-start;
+        // border: 1px solid red;
+        width: 75%;
+
+
+        .album_section {
+            cursor: pointer;
+            text-align: left;
+            // min-width: 20rem;
+            height: 5rem;
+            border: 1px solid $lightgray;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 2rem 2rem 0rem 0;
+            
+            .title {
+                display: flex;
+                margin-bottom: .5rem;
+                .icon {
+                    margin-right: .5rem;
+                    color: $darkgray;
+                }
+            }
+            
+        }
+        .add__album {
+            margin-top: 2rem;
+            margin-left: 0rem;
+            border-radius: 5px;
+            height: 5rem;
+            width:8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 1px solid $lightgray;
+            cursor: pointer;
+
+            .icon {
+                margin-bottom: .5rem;
+                color: $darkgray;
+            }
+        }
+    }
+
+    
 
 
     .add_album_backg {
-        position: absolute;
+        position: fixed;
         left: 0;
         right: 0;
         top: 0;
@@ -69,6 +148,7 @@
         opacity: .5;
         display: none;
         z-index: 9;
+        height: 100%;
 
         &.show {
             display: block;

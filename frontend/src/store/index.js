@@ -6,7 +6,23 @@ export default createStore({
       albumName : 'test1',
       photos : [],
       albumDescription : 'Mantap'
-    }]
+    },{
+      albumName : 'test1',
+      photos : [],
+      albumDescription : 'Mantap'
+    },{
+      albumName : 'test1',
+      photos : [],
+      albumDescription : 'Mantap'
+    },{
+      albumName : 'test1',
+      photos : [],
+      albumDescription : 'Mantap'
+    },{
+      albumName : 'test1',
+      photos : [],
+      albumDescription : 'Mantap'
+    },]
   },
   mutations: {
   },
