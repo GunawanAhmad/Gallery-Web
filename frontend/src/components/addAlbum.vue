@@ -5,11 +5,23 @@
           <input type="text" name="name" autocomplete="off" required v-model="albumName">
       </div>
       <div class="album_type input_part">
-          <label for="type">Album type</label>
-          <select name="type" id="type" ref="typeSelect">
-              <option value="Public" selected>Public</option>
-              <option value="Private">Private</option>
-          </select>
+          <div class="public">
+              <input type="radio" name="type" value="public" id="public" required>
+              <div class="label">
+                  <label for="public">Public</label>
+                  <p>Anyone on the internet can see this album</p>
+              </div>
+              
+          </div>
+          <div class="private">
+               <input type="radio" name="type" value="private" id="private" required>
+               <div class="label">
+                   <label for="private">Private</label>
+                   <p>Only you can see this album</p>
+               </div>
+               
+          </div>
+         
       </div>
       <div class="album_description input_part">
           <label for="description" >Description</label>
@@ -32,7 +44,14 @@ export default {
     methods : {
         addAlbum(e) {
             e.preventDefault();
-            let albumType = this.$refs.typeSelect.value;
+            let albumType;
+            let radios = document.getElementsByName('type')
+            for(let i = 0; i < radios.length; i++) {
+                if(radios[i].checked) {
+                    albumType = radios[i].value;
+                }
+            }
+            
             let album = {
                 albumName : this.albumName,
                 albumType : albumType,
@@ -40,7 +59,7 @@ export default {
                 photos : []
             };
             this.$store.state.albums.push(album)
-            
+            this.$emit('close-tab')
         }
     }
 }
