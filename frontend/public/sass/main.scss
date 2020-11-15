@@ -9,22 +9,22 @@
     margin: auto;
     // flex-wrap: wrap;
     
+    
 
     .profile-container {
         width: 30%;
         display: flex;
         flex-direction: column;
-        // justify-content: flex-start;
         align-items: flex-start;
-        // flex-basis: 0;
         // border: 1px solid red;
+
 
         .photo {
             height: 200px;
             width: 200px;
             background-color: $lightgray;
             border-radius: 50%;
-            // align-self: center;
+           
         }
 
         .fullname {
@@ -93,13 +93,13 @@
         align-content: flex-start;
         // border: 1px solid red;
         width: 75%;
-
+        
 
         .album_section {
             cursor: pointer;
             text-align: left;
             // min-width: 20rem;
-            height: 5rem;
+            min-height: 5rem;
             border: 1px solid $lightgray;
             border-radius: 5px;
             padding: 1rem;
@@ -115,24 +115,7 @@
             }
             
         }
-        .add__album {
-            margin-top: 2rem;
-            margin-left: 0rem;
-            border-radius: 5px;
-            height: 5rem;
-            width:8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            border: 1px solid $lightgray;
-            cursor: pointer;
-
-            .icon {
-                margin-bottom: .5rem;
-                color: $darkgray;
-            }
-        }
+        
     }
 
     
@@ -155,3 +138,37 @@
         }
     }
 }
+
+@media only screen and (max-width: 1024px) {
+    .main {
+        flex-direction: column;
+
+        .profile-container {
+            width: 100%;
+            align-items: center;
+
+            .username, .fullname {
+                text-align: center;
+            }
+        }
+
+        .albums-container {
+            width: 100%;
+            margin-left: 1rem;
+            align-items: center;
+            // border: 1px solid red;
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    
+ }
+
+ @media only screen and (max-width: 600px) {
+     .main {
+
+        .albums-container {
+            grid-template-columns: 1fr;
+        }
+        
+     }
+ } 
