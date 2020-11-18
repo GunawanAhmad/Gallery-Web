@@ -25,7 +25,7 @@
           <li class="img-profile nav__list">
               <div class="img" @click="toggleMenu"></div>
               <ul class="menu__list" ref="menuList">
-                  <li @click="toggleMenu">New album</li>
+                  <li @click="toggleMenu"> <router-link :to="'/' + username + '/add-album'">New album</router-link> </li>
                   <li @click="toggleMenu">
                       <router-link :to="'/' + username">Your profile</router-link>
                   </li>

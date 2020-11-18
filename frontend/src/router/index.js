@@ -4,6 +4,7 @@ import Login from '../views/Login.vue'
 import Main from '../views/main.vue'
 import albumPhotos from '../views/albumPhotos.vue'
 import searchResultPage from '../views/searchResultPage.vue'
+import addAlbum from '../views/addAlbum.vue'
 
 const routes = [
   {
@@ -33,6 +34,11 @@ const routes = [
     path : '/:user',
     name : 'Main Page',
     component : Main
+  },
+  {
+    path : '/:user/add-album',
+    name : 'Add Album',
+    component : addAlbum
   },
   {
     path : '/:user/:album',

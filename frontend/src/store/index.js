@@ -22,7 +22,8 @@ export default createStore({
       albumName : 'test1',
       photos : [],
       albumDescription : 'Mantap'
-    },]
+    },],
+    username : 'gunawan'
   },
   mutations: {
   },

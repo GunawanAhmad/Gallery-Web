@@ -11,7 +11,7 @@
           <ul>
               <li v-if="!isSignup" @click="isSignup = true">Signup</li>
               <li v-else @click="isSignup = false">Login</li>
-              <li><router-link to="/about">About</router-link> </li>
+              <li><router-link to="/">About</router-link> </li>
           </ul>
       </div>
   </nav>
