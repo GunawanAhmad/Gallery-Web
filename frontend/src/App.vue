@@ -2,8 +2,14 @@
   <div id="nav" v-if="checkRoute">
     <Navbar/>
   </div>
-  
   <router-view/>
+  <div class="container-loader hide" ref="loader">
+      <div class="circle-con">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -23,28 +29,13 @@ export default {
   },
   mounted() {
     console.log(this.$route.path)
+    this.$store.state.loadingScreen = this.$refs.loader;
   }
 }
 </script>
 
 
-<style lang="scss">
-
-
-@import '../public/sass/variable.scss';
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-#app {
-  font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-}
+<style src="../public/sass/app.scss" lang="scss">
 
 
 </style>

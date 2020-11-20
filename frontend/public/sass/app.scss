@@ -1,0 +1,72 @@
+
+@import "variable.scss";
+@import 'mixin.scss';
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#app {
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+
+    .container-loader {
+        display: flex;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        height: 100vh;
+        width: 100vw;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba($color: $primary-color, $alpha: .9);
+        z-index: 999;
+
+        &.hide {
+            display: none;
+        }
+        
+        .circle-con {
+            display: flex;
+
+            .circle {
+                width: 15px;
+                height: 15px;
+                background-color: $third-color;
+                border-radius: 50%;
+                margin-right: 0.6rem;
+                animation: bounce 1s ease-in-out infinite;
+    
+                &:last-child {
+                    animation-delay: 0.3s;
+                    background-color: $darkgray;
+                }
+                &:nth-last-child(2) {
+                    animation-delay: 0.2s;
+                    background-color: $fourth-color;
+                }
+              }
+        }
+
+        
+        
+      }
+      
+      
+      
+}
+
+@keyframes bounce {
+    50% {
+      transform: translateY(-200%);
+    }
+  
+    100% {
+      transform: translateY(0);
+    }
+  }

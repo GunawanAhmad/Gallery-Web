@@ -113,7 +113,7 @@ export default {
             e.preventDefault()
             if(this.isSignup) {
                 //do signup functionality
-                
+                this.$store.state.loadingScreen.classList.toggle('hide')
                 axios.post('/signup', {
                     name : this.name,
                     username : this.username,
@@ -124,25 +124,30 @@ export default {
                 .then(res => {
                     console.log(res)
                     this.isSignup = false
+
+                    this.$store.state.loadingScreen.classList.toggle('hide')
                 })
                 .catch(err => {
                     console.log(err.response.data)
+                    this.$store.state.loadingScreen.classList.toggle('hide')
                 })
                 
             } else {
                 //do login functionality
-
+                this.$store.state.loadingScreen.classList.toggle('hide')
                 axios.post('/login', {
                     username : this.username,
                     password : this.password
                 })
                 .then(res => {
+                    this.$store.state.loadingScreen.classList.toggle('hide')
                     console.log(res)
                     localStorage.setItem("token", res.data.token);
                     localStorage.setItem("username", res.data.username);
                     this.$router.push({path : `/${localStorage.getItem('username')}`})
                 })
                 .catch(err => {
+                    this.$store.state.loadingScreen.classList.toggle('hide')
                     console.log(err)
                 })
             }
