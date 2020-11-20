@@ -25,6 +25,15 @@
           <p v-if="!isSignup">Sign in to your account</p>
           <p v-else>Signup for your account</p>
       </div>
+      
+      <div class="name form__input" v-if="isSignup">
+          <label for="name">Full name</label>
+          <div class="input">
+              <i class="fas fa-user"></i>
+              <input type="text"  name="name" autocomplete="off" v-model="name">
+          </div>
+          
+      </div>
       <div class="username form__input">
           <label for="username">Username</label>
           <div class="input">
@@ -66,7 +75,7 @@
 
 
       <div class="forgot__pass">
-          <router-link to="/">Forgot Password ?</router-link>
+          <router-link to="/" v-if="!isSignup">Forgot Password ?</router-link>
       </div>
       <button class="login__btn" @click="submit">{{ isSignup ? 'Signup' : 'Login' }}</button>
   </form>
@@ -77,6 +86,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -84,7 +94,8 @@ export default {
             username : '',
             email : '',
             password : '',
-            confirmPassword : ''
+            confirmPassword : '',
+            name : ''
         }
     },
     methods : {
@@ -102,8 +113,38 @@ export default {
             e.preventDefault()
             if(this.isSignup) {
                 //do signup functionality
+                
+                axios.post('/signup', {
+                    name : this.name,
+                    username : this.username,
+                    email : this.username,
+                    password : this.password,
+                    confirmPassword : this.confirmPassword
+                })
+                .then(res => {
+                    console.log(res)
+                    this.isSignup = false
+                })
+                .catch(err => {
+                    console.log(err.response.data)
+                })
+                
             } else {
                 //do login functionality
+
+                axios.post('/login', {
+                    username : this.username,
+                    password : this.password
+                })
+                .then(res => {
+                    console.log(res)
+                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("username", res.data.username);
+                    this.$router.push({path : `/${localStorage.getItem('username')}`})
+                })
+                .catch(err => {
+                    console.log(err)
+                })
             }
         }
               
