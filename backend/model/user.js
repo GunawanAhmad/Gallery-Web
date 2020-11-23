@@ -20,7 +20,13 @@ const userSchema = new Schema({
   email : {
     type : String,
     required : true
-  }
+  },
+  albums : [{
+    albumId : {
+      type : mongoose.Types.ObjectId,
+      ref : 'Album'
+    }
+  }]
   
 });
 

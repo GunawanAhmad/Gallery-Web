@@ -93,7 +93,7 @@ exports.login = (req, res, next) => {
       res.status(200).json({
         token: token,
         username: loadedUser.username,
-        role: loadedUser.role
+        
       });
       console.log("login succes");
     })
