@@ -5,7 +5,6 @@
       <div class="icon" @click="addImage">
           <i class="fas fa-plus"></i>
       </div>
-      <input type="file" ref="file" @change="fileSelected">
   </div>
   <div class="photos">
      <div class="img" v-for="(img,index) in photos" :key="index">
@@ -22,19 +21,26 @@
       </div>
       
   </div>
+  <add-photo v-if="isAddingPhoto" class="add-photo" @close="addImage"/>
 </div>
    
 </template>
 
 <script>
 
+import addPhoto from '../components/addPhoto'
+
 export default {
+    components : {
+        addPhoto
+    },
     data() {
         return {
             photos : [],
             selectedFile : null,
             albumIndex : undefined,
-            selectedPhoto : undefined
+            selectedPhoto : undefined,
+            isAddingPhoto : false
         }
     },
     created() {
@@ -52,10 +58,8 @@ export default {
     },
     methods : {
         addImage() {
-            //Clicking file input through icon button
-            const file = this.$refs.file;
-            file.click();
-
+            
+            this.isAddingPhoto = !this.isAddingPhoto
             
         },
         fileSelected(event) {

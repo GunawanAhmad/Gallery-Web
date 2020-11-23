@@ -23,7 +23,7 @@
                     <span class="icon"><i class="fas fa-folder"></i></span>
                     <span><p>{{ album.albumName }}</p></span>
                 </div>
-                <p class="album-desc">albums description</p>
+                <p class="album-desc">{{ album.description }}</p>
              </div>
       </div>
       
