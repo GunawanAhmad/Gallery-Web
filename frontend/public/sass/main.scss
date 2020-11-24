@@ -93,6 +93,8 @@
         align-content: flex-start;
         // border: 1px solid red;
         width: 75%;
+
+        
         
 
         .album_section {
@@ -104,10 +106,13 @@
             border-radius: 5px;
             padding: 1rem;
             margin: 2rem 2rem 0rem 0;
+            max-width: 500px;
+            
             
             .title {
                 display: flex;
                 margin-bottom: .5rem;
+                font-weight: 600;
                 .icon {
                     margin-right: .5rem;
                     color: $darkgray;
@@ -117,6 +122,7 @@
         }
         
     }
+    
 
     
 
@@ -142,6 +148,9 @@
 @media only screen and (max-width: 1024px) {
     .main {
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        // border: 1px solid red;
 
         .profile-container {
             width: 100%;
@@ -155,9 +164,11 @@
         .albums-container {
             width: 100%;
             margin-left: 1rem;
-            align-items: center;
             // border: 1px solid red;
             grid-template-columns: 1fr 1fr;
+            // justify-items: center;
+
+            
         }
     }
     

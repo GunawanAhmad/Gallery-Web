@@ -3,8 +3,8 @@
       <div class="profile-container">
           <div class="photo"></div>
           <div class="name">
-              <h1 class="fullname">Gunawan Nur Ahmad</h1>
-              <h2 class="username">Gunawan</h2>
+              <h1 class="fullname">{{ name }}</h1>
+              <h2 class="username">{{ username }}</h2>
           </div>
           <div class="desc">
               <p>saya adalah orang yang akan sukses, amin ya allah</p>
@@ -32,16 +32,44 @@
 
 <script>
 
-
+import axios from 'axios';
 export default {
     
     created() {
-        this.albums = this.$store.state.albums;
+        let username = this.$route.params.user;
+        let headers;
+
+        //check if the user we want to see is our page or not
+        if(username == localStorage.getItem("username")) {
+            // console.log(localStorage.getItem("token"))
+            headers = {
+                Authorization : 'Bearer ' + localStorage.getItem("token")
+            }
+            console.log(headers)   
+        } else {
+            headers = null
+        }
+        
+        this.username = localStorage.getItem("username")
+        axios.get('/' + username, {headers : headers})
+        .then(res => {
+            console.log(res)
+            this.albums = res.data.user.albums
+            console.log(this.albums)
+            this.$store.state.albums = res.data.user.albums
+            this.name = res.data.user.name
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    
     },
     data() {
         return {
             albums : [],
-            isAddAlbum : false
+            isAddAlbum : false,
+            username : '',
+            name : ''
         }
     },
     methods : {

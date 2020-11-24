@@ -49,6 +49,9 @@ export default {
             username : 'Gunawan'
         }
     },
+    created() {
+        this.username = localStorage.getItem("username")
+    },
     watch : {
         inputSearch() {
             if(this.inputSearch != '') {

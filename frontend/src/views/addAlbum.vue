@@ -59,7 +59,11 @@ export default {
                 description : this.description,
                 photos : []
             };
-            axios.post('/add-album', album)
+            axios.post('/add-album', album, {
+                headers : {
+                    Authorization: 'Bearer ' + localStorage.getItem("token")
+                }
+            })
             .then(res => {
                 this.$store.state.loadingScreen.classList.toggle('hide')
                 console.log(res)
