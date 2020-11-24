@@ -22,10 +22,10 @@ const userSchema = new Schema({
     required : true
   },
   albums : [{
-    albumId : {
+    
       type : mongoose.Types.ObjectId,
       ref : 'Album'
-    }
+    
   }]
   
 });
