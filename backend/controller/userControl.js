@@ -1,5 +1,6 @@
 const User = require("../model/user");
 const Album = require("../model/album");
+const album = require("../model/album");
 
 
 
@@ -51,7 +52,7 @@ exports.getUserAlbums = (req,res,next) => {
     if(req.userId) {
         // console.log(req.userId)
         User.findById(req.userId)
-        .populate('albums', 'albumName description')
+        .populate('albums', 'description albumName')
         .exec((err, user) => {
             if (err) {
                 let error = new Error('load album failed');
@@ -77,9 +78,50 @@ exports.getUserAlbums = (req,res,next) => {
             return res.status(200).json({msg : 'succes', user : user})
         })
     }
-
-
-    
-    
-    
 }
+
+
+exports.getAlbumPhotos = (req,res,next) => {
+    const albumId = req.params.albumId
+    Album.findById(albumId)
+    .select('photos')
+    .then(photos => {
+        // console.log(photos)
+        return res.status(200).json({msg : 'succes', photos : photos})
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+
+exports.addPhoto = (req,res,next) => {
+    const albumId = req.params.albumId;
+    const photoFile = req.file.path.replace("\\", "/");
+    const description = req.body.description;
+    
+    Album.findById(albumId)
+    .then(album => {
+        if(!album) {
+            const err = new Error('album not found')
+            err.statusCode = 404;
+            throw err;
+        }
+        const photo = {
+            path : photoFile,
+            description : description
+        }
+        album.photos.push(photo)
+        return album.save()
+    })
+    .then(result => {
+        console.log(result)
+        return res.status(200).json({msg : 'succes', data : result})
+    })
+    .catch(err => {
+        console.log(err)
+        throw err
+    })
+}
+
+
