@@ -3,12 +3,14 @@
 @import "variable.scss";
 
 .container {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
+    
 
     .background {
-        position: absolute;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
         height: 100%;
         width: 100%;
         background-color: rgba($color: $secondary-color, $alpha: .6);
@@ -96,7 +98,19 @@
             
         }
     
-    
+        
+        .img-sample {
+            width: 100%;
+            height: auto;
+
+            img {
+                // width: 100%;
+                max-height: 200px;
+                max-width: 100%;
+                width: auto;
+                height: auto;
+            }
+        }
     
     }
 }

@@ -18,7 +18,7 @@
 
       </div>
       <div class="albums-container">
-            <div class="album_section" v-for="(album, index) in albums" :key="index" @click="showPhotos(album.albumName)">
+            <div class="album_section" v-for="(album, index) in albums" :key="index" @click="showPhotos(album.albumName, album._id, index)">
                 <div class="title">
                     <span class="icon"><i class="fas fa-folder"></i></span>
                     <span><p>{{ album.albumName }}</p></span>
@@ -55,7 +55,6 @@ export default {
         .then(res => {
             console.log(res)
             this.albums = res.data.user.albums
-            console.log(this.albums)
             this.$store.state.albums = res.data.user.albums
             this.name = res.data.user.name
         })
@@ -73,8 +72,13 @@ export default {
         }
     },
     methods : {
-        showPhotos(albumName) {
-            this.$router.push({path : `/gunawanart/${albumName}`, params : {data : 'my name'}})
+        showPhotos(albumName, id, index) {
+            let albumInfo = {
+                index : index,
+                id : id
+            }
+            localStorage.setItem('albumInfo', JSON.stringify(albumInfo))
+            this.$router.push({path : `/gunawanart/${albumName}`})
         }
     }
 }

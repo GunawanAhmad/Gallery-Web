@@ -8,7 +8,10 @@
   </div>
   <div class="photos">
      <div class="img" v-for="(img,index) in photos" :key="index">
-         <img :src="img" alt="" @click="showPhoto(img, index)">
+         <img :src="baseUrl + img.path" alt="" @click="showPhoto(img, index)">
+     </div>
+     <div class="img" v-for="(img,index) in newPhotos" :key="index">
+         <img :src="img.path" alt="" @click="showPhoto(img, index)">
      </div>
   </div>
   <div class="back-photo" ref="backPhoto">
@@ -28,6 +31,7 @@
 
 <script>
 
+import axios from 'axios'
 import addPhoto from '../components/addPhoto'
 
 export default {
@@ -37,65 +41,45 @@ export default {
     data() {
         return {
             photos : [],
+            newPhotos : this.$store.state.newPhotos,
             selectedFile : null,
             albumIndex : undefined,
             selectedPhoto : undefined,
-            isAddingPhoto : false
+            isAddingPhoto : false,
+            albumInfo : null,
+            baseUrl : "http://localhost:5000/"
         }
     },
     created() {
-        //find the index of the current album in vue store
-        let currentAlbumName = this.$route.params.album;
-        let albums = this.$store.state.albums;
-        for(let i = 0; i < albums.length; i++) {
-            if (currentAlbumName === albums[i].albumName) {
-                this.albumIndex = i;
+        let albumInfo = JSON.parse(localStorage.getItem('albumInfo'))
+        this.albumId = albumInfo.id
+        this.albumIndex = albumInfo.index
+        
+        this.baseUrl = axios.defaults.baseURL + "/"
+        
 
-            }
-        }
-        this.photos = this.$store.state.albums[this.albumIndex].photos;
+        // let token = localStorage.getItem("token");
+        axios.get('/get-album-photos/' + this.albumId)
+        .then(res => {
+            console.log(res)
+            this.photos = res.data.photos.photos
+            
 
+        })
+        .catch(err => {
+            console.log(err)
+        })
     },
+    
     methods : {
         addImage() {
             
             this.isAddingPhoto = !this.isAddingPhoto
             
-        },
-        fileSelected(event) {
-            //add image to album
-            let albumIndex;
-            let currentAlbumName = this.$route.params.album;
-            let albums = this.$store.state.albums;
-
-            //find the index of the current album in vue store
-            for(let i = 0; i < albums.length; i++) {
-                if (currentAlbumName === albums[i].albumName) {
-                    albumIndex = i;
-                }
-            }
-
-            //select the selected file
-            this.selectedFile = event.target.files[0]
-            
-            //add selected file to album
-            let path = URL.createObjectURL(this.selectedFile)
-            
-            //add image to album
-            this.$store.state.albums[albumIndex].photos.unshift(path)
-            
-        },
-        showPhoto(img) {
-            this.$refs.backPhoto.classList.toggle('show')
-            this.$refs.imgFocus.src = img;
-        },
-        hidePhoto() {
-            this.$refs.backPhoto.classList.toggle('show')
-        },
-        deletePhoto() {
-            this.$store.state.albums[this.albumIndex].photos.splice(this.selectedPhoto, 1)
-            this.hidePhoto()
         }
+    },
+    mounted() {
+        
     }
 }
 </script>

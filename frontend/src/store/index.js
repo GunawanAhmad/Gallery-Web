@@ -4,7 +4,9 @@ export default createStore({
   state: {
     albums : [],
     username : 'gunawan',
-    loadingScreen : null
+    loadingScreen : null,
+    newPhotos : []
+    
   },
   mutations: {
   },
