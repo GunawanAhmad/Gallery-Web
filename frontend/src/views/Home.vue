@@ -25,7 +25,7 @@
       <p v-else>capture your best moment, create album  <br>
           and save it online 
       </p>
-      <button class="btn">Get started</button>
+      <button class="btn"> <router-link to="/login">Get started</router-link></button>
       
     </main>
   </div>

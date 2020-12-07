@@ -98,9 +98,8 @@
         
 
         .album_section {
-            cursor: pointer;
+            position: relative;
             text-align: left;
-            // min-width: 20rem;
             min-height: 5rem;
             border: 1px solid $lightgray;
             border-radius: 5px;
@@ -113,9 +112,66 @@
                 display: flex;
                 margin-bottom: .5rem;
                 font-weight: 600;
-                .icon {
-                    margin-right: .5rem;
-                    color: $darkgray;
+                justify-content: space-between;
+
+                .album-name {
+                    
+                    display: flex;
+                    cursor: pointer;
+
+                    .icon {
+                        margin-right: .5rem;
+                        color: $darkgray;
+                    }
+
+                    
+                }
+                .menu-logo {
+                    cursor: pointer;
+                    color: $darkgray
+                }
+
+                
+                
+            }
+
+            .menu {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                background-color: $lightesgray; 
+                border-radius: $border-radius-light;
+                overflow: hidden;
+                display: none;
+                z-index: 10;
+
+                ul {
+                    
+
+                    li {
+                        list-style: none;
+                        padding: .5rem 1rem;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $lightgray;
+                        }
+
+                        .btn {
+                            background: none;
+                            border: none;
+                            outline: none;
+                            height: 100%;
+                            width: 100%;
+                            text-align: left;
+                            cursor: pointer;
+                        }
+                        
+                    }
+                }
+
+                &.show {
+                    display: block;
                 }
             }
             
@@ -127,17 +183,14 @@
     
 
 
-    .add_album_backg {
+    .background {
         position: fixed;
+        top: 0;
         left: 0;
         right: 0;
-        top: 0;
         bottom: 0;
-        background-color: $secondary-color;
-        opacity: .5;
-        display: none;
         z-index: 9;
-        height: 100%;
+        display: none;
 
         &.show {
             display: block;

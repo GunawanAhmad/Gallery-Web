@@ -10,7 +10,7 @@
      <div class="img" v-for="(img,index) in photos" :key="index">
          <img :src="baseUrl + img.path" alt="" @click="showPhoto(img, index)">
      </div>
-     <div class="img" v-for="(img,index) in newPhotos" :key="index">
+     <div class="img" v-for="(img,index) in $store.state.newPhotos" :key="index">
          <img :src="img.path" alt="" @click="showPhoto(img, index)">
      </div>
   </div>
@@ -47,14 +47,16 @@ export default {
             selectedPhoto : undefined,
             isAddingPhoto : false,
             albumInfo : null,
+            albumName : '',
             baseUrl : "http://localhost:5000/"
         }
     },
     created() {
+        this.$store.commit('clearNewPhotos')
         let albumInfo = JSON.parse(localStorage.getItem('albumInfo'))
         this.albumId = albumInfo.id
         this.albumIndex = albumInfo.index
-        
+        // this.albumName = this.$store.state.albums[this.albumIndex].albumName
         this.baseUrl = axios.defaults.baseURL + "/"
         
 

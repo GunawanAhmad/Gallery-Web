@@ -67,8 +67,10 @@ nav {
                         height: 2rem;
                         display: flex;
                         align-items: center;
-                        justify-content: center;
+                        justify-content: space-between;
                         overflow: hidden;
+                        padding: 0 1rem;
+                        
 
                         a {
                             text-decoration: none;
@@ -78,6 +80,11 @@ nav {
                         &:hover {
                             background-color: rgb(231, 231, 231);
                             cursor: pointer;
+                        }
+                        &:first-child {
+                            .logo {
+                                font-size: .8rem;
+                            }
                         }
 
                         
@@ -191,6 +198,7 @@ nav {
                         flex: 1;
                         // height: 5rem;
                         display: flex;
+                        text-align: left;
                         align-items: center;
                         padding: .5rem 1rem;
                         justify-content: flex-start;

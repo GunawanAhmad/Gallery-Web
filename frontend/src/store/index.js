@@ -9,9 +9,17 @@ export default createStore({
     
   },
   mutations: {
+    clearNewPhotos(state) {
+      console.log('mutations')
+      state.newPhotos = []
+    },
+    deleteAlbum(state, {index}) {
+      state.albums.splice(index, 1)
+    }
   },
   actions: {
   },
   modules: {
   }
+  
 })

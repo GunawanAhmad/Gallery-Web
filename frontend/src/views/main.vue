@@ -18,14 +18,30 @@
 
       </div>
       <div class="albums-container">
-            <div class="album_section" v-for="(album, index) in albums" :key="index" @click="showPhotos(album.albumName, album._id, index)">
-                <div class="title">
-                    <span class="icon"><i class="fas fa-folder"></i></span>
-                    <span><p>{{ album.albumName }}</p></span>
+            <div class="album_section" v-for="(album, index) in albums" :key="index" >
+                <div class="title" >
+                    <div class="album-name" @click="showPhotos(album.albumName, album._id, index)">
+                        <span class="icon"><i class="fas fa-folder"></i></span>
+                        <span><p>{{ album.albumName }}</p></span>
+                    </div>
+                    <div class="menu-logo"  @click="showMenu(index)">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>  
                 </div>
                 <p class="album-desc">{{ album.description }}</p>
+                <div class="menu">
+                        <ul>
+                            <li @click="deleteAlbum(album._id, index)">
+                                <button class="btn">Delete</button>
+                            </li>
+                            <li>
+                                <button class="btn">Edit</button>
+                            </li>
+                        </ul>
+                    </div>
              </div>
       </div>
+      <div class="background" ref="background" @click="showMenu(null)"></div>
       
   </div>
 </template>
@@ -79,6 +95,37 @@ export default {
             }
             localStorage.setItem('albumInfo', JSON.stringify(albumInfo))
             this.$router.push({path : `/gunawanart/${albumName}`})
+        },
+        showMenu(index) {
+            
+            const menuList = document.querySelectorAll('.menu')
+            if(index !== null) {
+                this.$refs.background.classList.toggle('show')
+                menuList[index].classList.toggle('show')
+                return;
+            } 
+
+            this.$refs.background.classList.toggle('show')
+            menuList.forEach(menu => {
+                menu.classList.remove('show')
+            })
+            
+        },
+        deleteAlbum(albumId, index) {
+            console.log(albumId)
+
+            let headers = {
+                Authorization : 'Bearer ' + localStorage.getItem("token")
+            }
+            axios.delete('/deleteAlbum/' + albumId, {headers : headers})
+            .then(res => {
+                console.log(res)
+                this.showMenu(index)
+                this.$store.commit('deleteAlbum', {index})
+            })
+            .catch(err => {
+                console.log(err)
+            })
         }
     }
 }

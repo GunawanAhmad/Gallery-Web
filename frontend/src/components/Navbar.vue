@@ -8,14 +8,17 @@
       </div>
       <ul class="nav__ul">
           <li class="nav__list search" >
-              <input type="text" ref="searchInput"  @focusout="closeResultBar" @focus="openResultBar" v-model="inputSearch" >
+              <input type="text" ref="searchInput"  @focusout="closeResultBar" @focus="openResultBar" v-model="inputSearch">
               <span class="search__logo" @click="showSearchInput" ref="searchLogo">
                   <i class="fas fa-search"></i>
               </span>
               <div class="search-result" v-show="resultShow"> 
                   <ul ref="suggestionBar" @mouseover="suggestBoxHover" @mouseout="suggestBoxHover">
-                      <li @click="selectSuggestion(inputSearch)">{{ inputSearch }}</li>
-                      <li v-for="(data,index) in arrSearchResult" :key="index" @click="selectSuggestion(data)">{{ data }}</li>
+                      <li @click="selectSuggestion(inputSearch)">
+                          <p>{{ inputSearch }} </p>
+                          <span class="logo"><i class="fas fa-search"></i></span>
+                      </li>
+                      <li v-for="(data,index) in arrSearchResult" :key="index" @click="selectSuggestion(data.name)">{{ data.name }}</li>
                   </ul>
               </div>
               
@@ -40,11 +43,13 @@
 </template>
 
 <script>
+
+import axios from 'axios'
 export default {
     data() {
         return {
             resultShow : false,
-            arrSearchResult : ['makan'],
+            arrSearchResult : [],
             inputSearch : '',
             username : 'Gunawan'
         }
@@ -53,12 +58,23 @@ export default {
         this.username = localStorage.getItem("username")
     },
     watch : {
-        inputSearch() {
-            if(this.inputSearch != '') {
+        inputSearch(value) {
+            if(value != '') {
                 this.resultShow = true;
                 this.$refs.searchInput.classList.add('result-show')
 
                 //search from the backend logic
+
+                let headers = {
+                    Authorization : 'Bearer ' + localStorage.getItem("token")
+                }
+                axios.get('/queryUser/' + value, {headers : headers})
+                .then(res => {
+                    this.arrSearchResult = res.data.users
+                })
+                .catch(err => console.log(err))
+
+
             } else {
                 this.resultShow = false
                 this.$refs.searchInput.classList.remove('result-show')
@@ -100,11 +116,14 @@ export default {
             }
         },  
         selectSuggestion(data) {
+            this.resultShow = false;
+            this.$refs.searchInput.classList.remove('result-show')
             this.inputSearch = data;
             this.resultShow = false;
             this.$refs.searchInput.classList.remove('result-show')
             this.$router.push({path : '/search', query : {q : data}})
-        }
+        },
+        
         
        
     }

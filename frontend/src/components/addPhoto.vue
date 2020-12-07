@@ -1,7 +1,6 @@
 <template>
-<div class="container"  >
-    
-    <form action="" class="form" >
+<div class="container">
+    <div  class="form">
       <div class="photo input_part">
           <label for="name" >Choose photo</label>
           <input type="file" name="name" autocomplete="off" required @change="selectFile">
@@ -14,8 +13,8 @@
           <label for="description" >Description</label>
           <textarea name="description"  cols="30" rows="10" v-model="newPhoto.description"></textarea>
       </div>
-      <button class="btn" @click="emitData">Add photo</button>
-  </form>
+      <button class="btn" @click="submitData">Add photo</button>
+  </div>
   <div class="background" @click="closeTab"></div>
 </div>
   
@@ -47,7 +46,6 @@ export default {
             this.closeTab()
         },
         submitData(e) {
-            
             e.preventDefault()
             this.$store.state.loadingScreen.classList.toggle('hide')
 
