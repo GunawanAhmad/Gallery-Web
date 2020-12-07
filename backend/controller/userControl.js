@@ -125,3 +125,25 @@ exports.addPhoto = (req,res,next) => {
 }
 
 
+exports.getAlluser = (req,res,next) => {
+    const user = req.params.q
+    const userId = req.userId;
+    User.find({$and : [
+        {_id : {$ne : userId}},
+        {$or : [
+            {"name": {$regex: ".*" + user + ".*"}},
+            {"username": {$regex: ".*" + user + ".*"}}
+        ]}
+    ]})
+    .select('username name')
+    .limit(5)
+    .then(response => {
+        return res.status(200).json({msg : 'succes', users : response})
+        
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+
