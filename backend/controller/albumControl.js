@@ -1,6 +1,7 @@
 const User = require("../model/user");
 const Album = require("../model/album");
-const fileHelper = require('../util/file')
+const fileHelper = require('../util/file');
+const { response } = require("express");
 
 
 exports.albumDelete = (req,res,next) => {
@@ -17,8 +18,21 @@ exports.albumDelete = (req,res,next) => {
         }
         
         console.log(album)
-        return res.json(album)
+        return User.findById(album.userId)
 
+    })
+    .then(user => {
+        console.log('asdas')
+        for(let i = 0; i< user.albums.length; i++) {
+            if (user.albums[i] == albumId) {
+                user.albums.splice(i, 1)
+                return user.save()
+            }
+        }
+        
+    })
+    .then(response => {
+        return res.json({response : response, mgg : "succes"})
     })
     .catch(err => {
         console.log(err)
