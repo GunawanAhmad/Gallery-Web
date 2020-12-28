@@ -1,0 +1,78 @@
+@import "variable.scss";
+
+.container {
+    display: flex;
+    max-width: 1366px;
+    margin: 2rem auto 0 auto;
+    flex-shrink: 0;
+
+    .menu {
+        // border: 1px solid red;
+        margin-left: 2rem;
+       
+        
+
+        .ul {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid $lightgray;
+            overflow: hidden;
+            border-radius: $border-radius-light;
+
+            li {
+                list-style: none;
+                border-bottom: 1px solid $lightgray;
+                position: relative;
+
+                a {
+                    text-decoration: none;
+                    color: black;
+                    padding: .5rem 2rem .5rem 1rem;
+                    height: 2rem;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    font-size: .9rem;
+                    width: 150px;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &.active ::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    bottom: 0;
+                    width: 3px;
+                    background-color: $fourth-color;
+                }
+               
+            }
+        }
+    }
+
+    .router-view {
+        margin-left: 2rem;
+        // border: 1px solid red;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 970px) {
+    .container {
+        flex-direction: column;
+        padding: 0 2rem;
+
+        .menu {
+            margin: 0;
+            width: 50%;
+            max-width: 200px;
+        }
+
+        .router-view {
+            margin: auto;
+        }
+    }
+} 

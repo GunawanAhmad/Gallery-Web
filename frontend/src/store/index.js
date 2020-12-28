@@ -1,25 +1,24 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    albums : [],
-    username : 'gunawan',
-    loadingScreen : null,
-    newPhotos : []
-    
+    albums: [],
+    username: "",
+    avatar: "",
+    loadingScreen: null,
+    newPhotos: [],
+    avaImg: null,
   },
   mutations: {
     clearNewPhotos(state) {
-      console.log('mutations')
-      state.newPhotos = []
+      console.log("mutations");
+      state.newPhotos = [];
     },
-    deleteAlbum(state, {index}) {
-      state.albums.splice(index, 1)
-    }
+    deleteAlbum(state, { index }) {
+      state.albums.splice(index, 1);
+    },
   },
-  actions: {
-  },
-  modules: {
-  }
-  
-})
+
+  actions: {},
+  modules: {},
+});

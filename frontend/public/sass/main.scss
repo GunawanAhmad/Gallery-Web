@@ -1,238 +1,211 @@
 @import "variable.scss";
 
 .main {
-    padding: 2rem;
-    width: 100%;
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  // border: 1px solid red;
+  max-width: 1366px;
+  margin: auto;
+  // flex-wrap: wrap;
+
+  .profile-container {
+    width: 30%;
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     // border: 1px solid red;
-    max-width: 1366px;
-    margin: auto;
-    // flex-wrap: wrap;
-    
-    
 
-    .profile-container {
-        width: 30%;
+    .photo {
+      height: 200px;
+      width: 200px;
+      background-color: $lightgray;
+      border-radius: 50%;
+
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    .fullname {
+      font-weight: 600;
+      font-size: 1.8rem;
+      margin-top: 1rem;
+      text-align: left;
+    }
+    .username {
+      font-weight: lighter;
+      // border: 1px solid red;
+      text-align: left;
+    }
+    .desc {
+      text-align: left;
+      margin: 1rem 0;
+    }
+    .edit-btn {
+      margin-bottom: 1rem;
+      padding: 0.3rem 1rem;
+      border-radius: 5px;
+      width: 10rem;
+      border: 1px solid $lightgray;
+      cursor: pointer;
+    }
+
+    .follow-info {
+      display: flex;
+      // font-weight: 500;
+
+      .icon {
+        margin-right: 0.2rem;
+        color: $darkgray;
+      }
+
+      .followers {
+        margin-right: 1.5rem;
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          right: -17%;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 5px;
+          width: 5px;
+          border-radius: 50%;
+          background-color: $lightgray;
+        }
+      }
+    }
+  }
+
+  .albums-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-left: 5rem;
+    align-content: flex-start;
+    // border: 1px solid red;
+    width: 75%;
+
+    .album_section {
+      position: relative;
+      text-align: left;
+      min-height: 5rem;
+      border: 1px solid $lightgray;
+      border-radius: 5px;
+      padding: 1rem;
+      margin: 2rem 2rem 0rem 0;
+      max-width: 500px;
+
+      .title {
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        // border: 1px solid red;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        justify-content: space-between;
 
+        .album-name {
+          display: flex;
+          cursor: pointer;
 
-        .photo {
-            height: 200px;
-            width: 200px;
-            background-color: $lightgray;
-            border-radius: 50%;
-           
+          .icon {
+            margin-right: 0.5rem;
+            color: $darkgray;
+          }
         }
-
-        .fullname {
-            font-weight: 600;
-            font-size: 1.8rem;
-            margin-top : 1rem;
-            text-align: left;
+        .menu-logo {
+          cursor: pointer;
+          color: $darkgray;
         }
-        .username {
-            font-weight: lighter;
-            // border: 1px solid red;
-            text-align: left;
-        }
-        .desc {
-            text-align: left;
-            margin: 1rem 0;
-        }
-        .edit-btn {
-            margin-bottom: 1rem;
-            padding: .3rem 1rem;
-            border-radius: 5px;
-            width: 10rem;
-            border: 1px solid $lightgray;
-            cursor: pointer;
-        }
-       
-        .follow-info {
-            display: flex;
-            // font-weight: 500;
+      }
 
-            
-
-            .icon {
-                margin-right: .2rem;
-                color: $darkgray;
-                
-            }
-
-            .followers {
-                margin-right: 1.5rem;
-                position: relative;
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    right: -17%;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    height: 5px;
-                    width: 5px;
-                    border-radius: 50%;
-                    background-color: $lightgray;
-                    
-                }
-            }
-        }
-    }
-    
-
-    
-
-    .albums-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        margin-left: 5rem;
-        align-content: flex-start;
-        // border: 1px solid red;
-        width: 75%;
-
-        
-        
-
-        .album_section {
-            position: relative;
-            text-align: left;
-            min-height: 5rem;
-            border: 1px solid $lightgray;
-            border-radius: 5px;
-            padding: 1rem;
-            margin: 2rem 2rem 0rem 0;
-            max-width: 500px;
-            
-            
-            .title {
-                display: flex;
-                margin-bottom: .5rem;
-                font-weight: 600;
-                justify-content: space-between;
-
-                .album-name {
-                    
-                    display: flex;
-                    cursor: pointer;
-
-                    .icon {
-                        margin-right: .5rem;
-                        color: $darkgray;
-                    }
-
-                    
-                }
-                .menu-logo {
-                    cursor: pointer;
-                    color: $darkgray
-                }
-
-                
-                
-            }
-
-            .menu {
-                position: absolute;
-                right: 0;
-                top: 50%;
-                background-color: $lightesgray; 
-                border-radius: $border-radius-light;
-                overflow: hidden;
-                display: none;
-                z-index: 10;
-
-                ul {
-                    
-
-                    li {
-                        list-style: none;
-                        padding: .5rem 1rem;
-                        cursor: pointer;
-
-                        &:hover {
-                            background-color: $lightgray;
-                        }
-
-                        .btn {
-                            background: none;
-                            border: none;
-                            outline: none;
-                            height: 100%;
-                            width: 100%;
-                            text-align: left;
-                            cursor: pointer;
-                        }
-                        
-                    }
-                }
-
-                &.show {
-                    display: block;
-                }
-            }
-            
-        }
-        
-    }
-    
-
-    
-
-
-    .background {
-        position: fixed;
-        top: 0;
-        left: 0;
+      .menu {
+        position: absolute;
         right: 0;
-        bottom: 0;
-        z-index: 9;
+        top: 50%;
+        background-color: $lightesgray;
+        border-radius: $border-radius-light;
+        overflow: hidden;
         display: none;
+        z-index: 10;
+
+        ul {
+          li {
+            list-style: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+
+            &:hover {
+              background-color: $lightgray;
+            }
+
+            .btn {
+              background: none;
+              border: none;
+              outline: none;
+              height: 100%;
+              width: 100%;
+              text-align: left;
+              cursor: pointer;
+            }
+          }
+        }
 
         &.show {
-            display: block;
+          display: block;
         }
+      }
     }
+  }
+
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+    display: none;
+
+    &.show {
+      display: block;
+    }
+  }
 }
 
 @media only screen and (max-width: 1024px) {
-    .main {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        // border: 1px solid red;
+  .main {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    // border: 1px solid red;
 
-        .profile-container {
-            width: 100%;
-            align-items: center;
+    .profile-container {
+      width: 100%;
+      align-items: center;
 
-            .username, .fullname {
-                text-align: center;
-            }
-        }
-
-        .albums-container {
-            width: 100%;
-            margin-left: 1rem;
-            // border: 1px solid red;
-            grid-template-columns: 1fr 1fr;
-            // justify-items: center;
-
-            
-        }
+      .username,
+      .fullname {
+        text-align: center;
+      }
     }
-    
- }
 
- @media only screen and (max-width: 600px) {
-     .main {
+    .albums-container {
+      width: 100%;
+      margin-left: 1rem;
+      // border: 1px solid red;
+      grid-template-columns: 1fr 1fr;
+      // justify-items: center;
+    }
+  }
+}
 
-        .albums-container {
-            grid-template-columns: 1fr;
-        }
-        
-     }
- } 
+@media only screen and (max-width: 600px) {
+  .main {
+    .albums-container {
+      grid-template-columns: 1fr;
+    }
+  }
+}

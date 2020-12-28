@@ -8,7 +8,7 @@ exports.createUser = (req, res, next) => {
   const username = req.body.username;
   const name = req.body.name;
   const password = req.body.password;
-  const email  = req.body.email;
+  const email = req.body.email;
   let loadedUser;
 
   const errors = validationResult(req);
@@ -16,18 +16,18 @@ exports.createUser = (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
   User.findOne({ username: username })
-    .then(user => {
+    .then((user) => {
       if (user) {
         const error = new Error("username sudah ada");
         error.statusCode = 401;
         throw error;
       }
-      bcrypt.hash(password, 12).then(hashedPass => {
+      bcrypt.hash(password, 12).then((hashedPass) => {
         const user = new User({
           name: name,
           password: hashedPass,
           username: username,
-          email : email,
+          email: email,
         });
         loadedUser = user;
         user.save((err, doc) => {
@@ -37,7 +37,7 @@ exports.createUser = (req, res, next) => {
           const token = jwt.sign(
             {
               username: doc.username,
-              userId: doc._id.toString()
+              userId: doc._id.toString(),
             },
             "thisissecretkey",
             { expiresIn: "2h" }
@@ -45,13 +45,13 @@ exports.createUser = (req, res, next) => {
           res.status(200).json({
             token: token,
             username: doc.username,
-            role: doc.role
+            role: doc.role,
           });
         });
       });
     })
 
-    .catch(err => {
+    .catch((err) => {
       if (!err.statusCode) {
         err.statusCode = 500;
       }
@@ -68,7 +68,7 @@ exports.login = (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
   User.findOne({ username: username })
-    .then(user => {
+    .then((user) => {
       if (!user) {
         throw new Error("username is invalid");
       }
@@ -76,7 +76,7 @@ exports.login = (req, res, next) => {
 
       return bcrypt.compare(password, user.password);
     })
-    .then(isEqual => {
+    .then((isEqual) => {
       if (!isEqual) {
         const error = new Error("Wrong password");
         error.statusCode = 401;
@@ -85,7 +85,7 @@ exports.login = (req, res, next) => {
       const token = jwt.sign(
         {
           username: loadedUser.username,
-          userId: loadedUser._id.toString()
+          userId: loadedUser._id.toString(),
         },
         "thisissecretkey",
         { expiresIn: "2h" }
@@ -93,11 +93,11 @@ exports.login = (req, res, next) => {
       res.status(200).json({
         token: token,
         username: loadedUser.username,
-        
+        avatar: loadedUser.avatar,
       });
       console.log("login succes");
     })
-    .catch(err => {
+    .catch((err) => {
       if (!err.statusCode) {
         err.statusCode = 500;
       }
@@ -112,13 +112,13 @@ exports.changeUsername = (req, res, next) => {
   console.log(oldUsername, newUsername, password);
   let loadedUser = null;
   User.findOne({ username: oldUsername })
-    .then(user => {
+    .then((user) => {
       if (user) {
         loadedUser = user;
         return bcrypt.compare(password, user.password);
       }
     })
-    .then(isEqual => {
+    .then((isEqual) => {
       if (!isEqual) {
         const error = new Error("Wrong password");
         error.statusCode = 401;
@@ -127,10 +127,10 @@ exports.changeUsername = (req, res, next) => {
       loadedUser.username = newUsername;
       return loadedUser.save();
     })
-    .then(result => {
+    .then((result) => {
       res.status(200).json({ msg: "change username succes", user: result });
     })
-    .catch(err => {
+    .catch((err) => {
       if (!err.statusCode) {
         err.statusCode = 500;
       }
@@ -149,7 +149,7 @@ exports.changePassword = (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
   User.findOne({ username: username })
-    .then(user => {
+    .then((user) => {
       if (!user) {
         const error = new Error("username invalid");
         throw error;
@@ -157,7 +157,7 @@ exports.changePassword = (req, res, next) => {
       loadedUser = user;
       return bcrypt.compare(oldPassword, user.password);
     })
-    .then(isEqual => {
+    .then((isEqual) => {
       if (!isEqual) {
         const error = new Error("Wrong password");
         error.statusCode = 401;
@@ -165,14 +165,14 @@ exports.changePassword = (req, res, next) => {
       }
       return bcrypt.hash(newPassword, 12);
     })
-    .then(hashed => {
+    .then((hashed) => {
       loadedUser.password = hashed;
       return loadedUser.save();
     })
-    .then(result => {
+    .then((result) => {
       res.status(200).json({ msg: "change password succes", user: result });
     })
-    .catch(err => {
+    .catch((err) => {
       if (!err.statusCode) {
         err.statusCode = 500;
       }

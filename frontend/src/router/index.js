@@ -5,6 +5,9 @@ import Main from '../views/main.vue'
 import albumPhotos from '../views/albumPhotos.vue'
 import searchResultPage from '../views/searchResultPage.vue'
 import addAlbum from '../views/addAlbum.vue'
+import settings from '../views/settings.vue'
+import profileSetting from '../views/settingsView/profileSetting.vue'
+import accountSetting from '../views/settingsView/accountSetting.vue'
 
 const routes = [
   {
@@ -29,6 +32,21 @@ const routes = [
     path : '/search',
     name : 'Search page',
     component : searchResultPage
+  },
+  {
+    path : '/settings',
+    name : 'Settings',
+    component : settings,
+    children :[
+      {
+        path : 'profile',
+        component : profileSetting
+      },
+      {
+        path : 'account',
+        component : accountSetting
+      }
+    ]
   },
   {
     path : '/:user',

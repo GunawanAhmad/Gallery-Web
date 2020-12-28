@@ -1,15 +1,12 @@
-const express = require('express')
-const mongoose = require('mongoose')
+const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
-const path = require('path');
+const path = require("path");
 const bodyParser = require("body-parser");
-const multer = require('multer');
+const multer = require("multer");
 
 const authRouter = require("./routes/authRoutes.js");
 const userRouter = require("./routes/userRoutes.js");
-
-
-
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -22,44 +19,12 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
-const fileStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "images");
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 100)
-    cb(null,  uniqueSuffix + '-' + file.originalname )
-  }
-});
-
-const filterImg = (req, file, cb) => {
-  if (
-    file.mimetype === "image/png" ||
-    file.mimetype === "image/jpg" ||
-    file.mimetype === "image/jpeg"
-  ) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
 app.use(bodyParser.json());
-
-app.use(
-  multer({ storage: fileStorage, fileFilter: filterImg }).single('photo')
-);
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 
-
-
-
 app.use(authRouter);
 app.use(userRouter);
-
 
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
@@ -74,11 +39,11 @@ mongoose
   .connect("mongodb://localhost:27017/webGallery", {
     dbName: "Web-Gallery-App",
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
-  .then(result => {
-    app.listen(port, err => {
-      if (err) return console.log(`Something bad happened: ${err}`); 
+  .then((result) => {
+    app.listen(port, (err) => {
+      if (err) return console.log(`Something bad happened: ${err}`);
     });
   })
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));

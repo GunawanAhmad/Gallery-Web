@@ -11,6 +11,19 @@
     }
 }
 
+@mixin  pseudoTriangleBef($size, $side, $color : #4B55C1, $left : 0, $top : 0) {
+
+    &::before {
+        content: '';
+        border: $size solid transparent;
+        border-#{$side}-color: $color;
+        left: $left;
+        top: $top;
+        position: absolute;
+        
+    }
+}
+
 @mixin navHover($bottom : 0) {
     &::before {
         content: '';
